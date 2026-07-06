@@ -8,6 +8,7 @@ import {
 
 import { sales } from "./sales"
 import { products } from "./product";
+import { relations } from "drizzle-orm";
 
 export const saleItems = pgTable("sale_items", {
   id: serial("id").primaryKey(),
@@ -39,3 +40,16 @@ export const saleItems = pgTable("sale_items", {
     .defaultNow()
     .notNull(),
 });
+
+
+export const saleItemRelation=relations(saleItems,({one})=>({
+  product:one(products,{
+    fields:[saleItems.productId],
+    references:[products.id]
+  }),
+
+  sale:one(sales,{
+    fields:[saleItems.saleId],
+    references:[sales.id]
+  })
+}))

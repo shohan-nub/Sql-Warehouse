@@ -2,6 +2,8 @@
 import { pgTable,serial,text,timestamp,integer } from "drizzle-orm/pg-core";
 import { warehouses } from "./warehouse";
 import { suppliers } from "./supplier";
+import { relations } from "drizzle-orm";
+import { purchasedItem } from "./purchasedItem";
 
 
 export const purchases=pgTable("purchases",{
@@ -18,3 +20,19 @@ export const purchases=pgTable("purchases",{
     purchaseDate:timestamp("purchase_date").defaultNow().notNull(),
 
 });
+
+
+export const purchaseRelation=relations(purchases,({one,many})=>({
+    warehouse:one(warehouses,{
+        fields:[purchases.warehouseId],
+        references:[warehouses.id]
+    }),
+
+    item:many(purchasedItem),
+
+    supplier:one(suppliers,{
+        fields:[purchases.supplierId],
+        references:[suppliers.id]
+    })
+
+}))

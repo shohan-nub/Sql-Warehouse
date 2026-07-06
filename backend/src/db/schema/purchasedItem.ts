@@ -1,6 +1,7 @@
 import { pgTable,numeric,integer,serial ,timestamp} from "drizzle-orm/pg-core";
 import { products } from "./product";
 import { purchases } from "./purchase";
+import { relations } from "drizzle-orm";
 
 
 
@@ -19,4 +20,19 @@ export const purchasedItem=pgTable("purchasedItem",{
     updatedAt:timestamp("updatedAt").defaultNow().notNull(),
 
 
-})
+});
+
+export const piRelation=relations(purchasedItem,({one,many})=>({
+
+    product:one(products,{
+        fields:[purchasedItem.productId],
+        references:[products.id]
+    }),
+    purchased:one(purchases,{
+        fields:[purchasedItem.purchasedId],
+        references:[purchases.id]
+    })
+
+
+
+}))
