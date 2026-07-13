@@ -13,6 +13,7 @@ export const products= pgTable("products",{
     name:text("name").notNull(),
     sku:text("sku").unique().notNull(),
     price:numeric("price",{precision:10,scale:2}).notNull(),
+    
     categoryId:integer("category_id").references(()=>categories.id),//eije
     createdAt:timestamp("create_at").defaultNow().notNull(),
     updatedAt:timestamp("update_at").defaultNow().notNull(),
