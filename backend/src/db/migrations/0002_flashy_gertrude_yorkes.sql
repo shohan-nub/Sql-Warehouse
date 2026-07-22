@@ -42,7 +42,7 @@ CREATE TABLE "suppliers" (
 	"phone" text NOT NULL,
 	"address" text NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL, 
 	CONSTRAINT "suppliers_email_unique" UNIQUE("email"),
 	CONSTRAINT "suppliers_phone_unique" UNIQUE("phone")
 );

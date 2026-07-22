@@ -18,7 +18,7 @@ export const purchases=pgTable("purchases",{
     createdAt:timestamp("created_at").defaultNow().notNull(),
     updatedAt:timestamp("updated_at").defaultNow().notNull(),
     purchaseDate:timestamp("purchase_date").defaultNow().notNull(),
-
+2
 });
 
 

@@ -17,7 +17,7 @@ CREATE TABLE "warehouses" (
 	"updated_at" timestamp DEFAULT now() NOT NULL,
 	CONSTRAINT "warehouses_name_unique" UNIQUE("name")
 );
---> statement-breakpoint
+--> statement-breakpoint   
 CREATE TABLE "inventories" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"products_id" integer NOT NULL,
